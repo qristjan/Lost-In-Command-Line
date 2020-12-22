@@ -1,24 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-
 public class MainInputLine : MonoBehaviour
 {
 
     public TMP_InputField tmpInputField;
-    public TMP_Text tmpText;
-
-    void Start()
-    {
-        tmpText.text = "type /help for¥¢ .. ‰  and ð∂..ø Ø";
-    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && tmpInputField.text != null)
         {
-            this.tmpInputField.text = "";
+            var input = tmpInputField.text;
+            GameFlowContoller.MainInputEnterClicked += () => input;
+            tmpInputField.text = "";
+            tmpInputField.ActivateInputField();
         }
     }
 
